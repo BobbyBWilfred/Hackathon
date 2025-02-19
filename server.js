@@ -9,14 +9,6 @@ import session from 'express-session';
 import { fileURLToPath } from 'url';
 import MongoStore from 'connect-mongo';
 
-app.use(session({
-  secret: 'your-strong-secret-key',
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: 'mongodb+srv://BobbyBWilfred:Legendbob2005%23@bbwcluster.0ctao.mongodb.net/bbwDatabase'
-  })
-}));
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -83,7 +75,14 @@ const server = http.createServer(app);
 
 
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(session({
+    secret: 'your-strong-secret-key',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: 'mongodb+srv://BobbyBWilfred:Legendbob2005%23@bbwcluster.0ctao.mongodb.net/bbwDatabase'
+    })
+  }));
 
 async function hashPassword(password) {
     return await bcrypt.hash(password, 10);
