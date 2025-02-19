@@ -7,17 +7,27 @@ import http from 'http';
 import { Server } from 'socket.io'; 
 import session from 'express-session';
 import { fileURLToPath } from 'url';
+import MongoStore from 'connect-mongo';
+
+app.use(session({
+  secret: 'your-strong-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: 'mongodb+srv://BobbyBWilfred:Legendbob2005%23@bbwcluster.0ctao.mongodb.net/bbwDatabase'
+  })
+}));
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const PORT = 7000;
 
 // MongoDB Connection
-mongoose.connect('mongodb+srv://BobbyBWilfred:Legendbob2005%23@bbwcluster.0ctao.mongodb.net/bbwDatabase?retryWrites=true&w=majority&appName=BBWCluster', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => console.log('MongoDB connected'))
-    .catch(err => console.error('MongoDB connection error:', err));
+mongoose.connect('mongodb+srv://BobbyBWilfred:Legendbob2005%23@bbwcluster.0ctao.mongodb.net/bbwDatabase?retryWrites=true&w=majority&appName=BBWCluster')
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
 
 // Define Schemas & Models
 const participantSchema = new mongoose.Schema({
@@ -71,13 +81,9 @@ const Admin = mongoose.model('Admin', adminSchema);
 const app = express();
 const server = http.createServer(app);
 
-app.use(bodyParser.json());
-app.use(session({
-    secret: 'your-strong-secret-key', 
-    resave: false,
-    saveUninitialized: true
-}));
-app.use(express.static(path.join(__dirname, 'hackathon.html')));
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 async function hashPassword(password) {
     return await bcrypt.hash(password, 10);
@@ -136,14 +142,17 @@ async function calculateScore(review) {
 }
   
 
-  app.get('/api/participants', async (req, res) => {
-      if (req.session.role !== 'admin') return res.status(403).json({ message: "Unauthorized" });
-      try {
-          const participants = await Participant.find({}, 'name regNo team scores attendance'); 
-          res.json(participants);
-      } catch (error) {
-      }
-  });
+app.get('/api/participants', async (req, res) => {
+    if (req.session.role !== 'admin') return res.status(403).json({ message: "Unauthorized" });
+    try {
+        const participants = await Participant.find({}, 'name regNo team scores attendance');
+        res.json(participants);
+    } catch (error) {
+        console.error("Error fetching participants:", error);
+        res.status(500).json({ message: "Error fetching participants" });
+    }
+});
+
   
   
 
@@ -209,16 +218,7 @@ app.post('/admin/login', async (req, res) => {
     }
 });
 
-app.get('/api/participants', async (req, res) => {
-    if (req.session.role !== 'admin') return res.status(403).json({ message: "Unauthorized" });
-    try {
-        const participants = await Participant.find({}, 'name regNo team');
-        res.json(participants);
-    } catch (error) {
-        console.error("Error fetching participants:", error);
-        res.status(500).json({ message: "Error fetching participants" });
-    }
-});
+
 
 app.post('/api/mark-attendance', async (req, res) => {
     if (req.session.role !== 'admin') return res.status(403).json({ message: "Unauthorized" });
@@ -244,8 +244,9 @@ app.post('/api/mark-attendance', async (req, res) => {
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'hackathon.html'));
+    res.sendFile(path.join(__dirname, 'public', 'hackathon.html'));
 });
+
 
 server.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
