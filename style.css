@@ -1,0 +1,251 @@
+body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #2A004E, #000000);
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+        .hidden {
+            display: none;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #D4A1FF;
+        }
+        .container {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 550px;
+    margin: auto;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12px);
+}
+.container1 {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 1300px;
+    margin: auto;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(12px);
+}
+
+#scores {
+            overflow-x: auto; 
+        }
+
+        #scores table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            table-layout: fixed;
+        }
+
+        #scores th,
+        #scores td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 0.95rem;
+            word-wrap: break-word; 
+            overflow: hidden; 
+            white-space: nowrap; 
+        }
+
+        #scores th {
+            background: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            font-size: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .review-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .review-cell > div {
+            display: flex;
+            align-items: center; 
+            gap: 5px;
+        }
+
+        .review-cell label {
+            font-size: 0.8rem;
+            color: #ddd;
+            width: 100%; 
+            text-align: left; 
+        }
+
+        .review-cell input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            font-size: 0.9rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        #scores .team-name-col {
+            width: 15%; 
+        }
+
+        #scores .review-col {
+            width: 25%; 
+        }
+
+        #scores .final-score-col {
+            width: 10%; 
+        }
+
+
+button {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+}
+
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            color: white;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            margin: 8px 0;
+            width: 90%;
+            border: none;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 15px;
+            text-align: center;
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .attendance-box {  
+            border: 1px solid white; 
+            padding: 5px 10px;
+            cursor: pointer; 
+            border-radius: 5px; 
+            min-width: 60px; 
+            text-align: center; 
+        }
+        .present {
+            background-color: lightgreen;
+        }
+        .absent {
+            background-color: lightcoral; 
+        }
+        select { 
+            padding: 5px;
+            border: 1px solid white;
+            background-color: rgba(255, 255, 255, 0.2); 
+            color: white;
+            border-radius: 5px;
+            appearance: none; 
+            -webkit-appearance: none;
+            -moz-appearance: none; 
+            background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24h-24z' fill='none'/></svg>"); /* Add custom arrow */
+            background-repeat: no-repeat;
+            background-position: right 5px center;
+            padding-right: 25px; 
+            cursor: pointer;
+        }
+
+        select option {
+            background-color: #2A004E; 
+            color: white;
+        }
+
+        select:disabled { 
+            opacity: 0.7; 
+            cursor: default;
+        }
+        .team-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.team-box {
+    background-color: #2C3E50; 
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.team-box:hover {
+    transform: translateY(-5px);
+    background-color: #1A252F; 
+}
+
+.team-box h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.team-box p {
+    text-align: center;
+    font-size: 1rem;
+}
+.creator-note-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #D4A1FF, #D4A1FF, #b570ed); 
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    z-index: 1000;
+    box-shadow: 0px 4px 10px rgba(255, 94, 98, 0.5); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  }
+
+  .creator-note-container p {
+    margin: 4px 0;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  }
+
+  .creator-note-container:hover {
+    transform: scale(1.05); 
+    box-shadow: 0px 6px 15px rgba(255, 94, 98, 0.7);
+  }
