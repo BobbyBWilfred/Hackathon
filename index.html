@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bionary Club - Hackathon Management</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="server.js"></script>
+    </head>
+<body>
+
+    <h1>Bionary Club</h1>
+
+    <div id="login-container" class="container">
+        <h2>Login</h2>
+        <input type="text" id="regNo" placeholder="Registration Number">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div id="dashboard" class="container hidden">
+        <h2>Admin Dashboard</h2>
+        <button onclick="showSection('participants')">View Participants</button>
+        <button onclick="showSection('teams')">View Teams</button>
+        <button onclick="showSection('attendance')">Attendance</button>
+        <button onclick="showSection('scores')">Scores</button>
+    </div>
+
+    <div id="participants" class="container hidden">
+        <h2>Participants</h2>
+        <button onclick="backToDashboard()">Back</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Reg No</th>
+                    <th>Team</th>
+                </tr>
+            </thead>
+            <tbody id="participants-list"></tbody>
+        </table>
+    </div>
+
+    <div id="teams" class="container hidden">
+        <h2>Teams</h2>
+        <button class="button" onclick="backToDashboard()">Back</button>
+        
+        <div id="teams-list" class="team-container">
+        </div>
+    </div>
+    
+
+    <div id="attendance" class="container hidden">
+        <h2>Mark Attendance</h2>
+        <button onclick="backToDashboard()">Back</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Reg No</th>
+                    <th>Morning</th>
+                    <th>Night</th>
+                    <th>Other</th>
+                </tr>
+            </thead>
+            <tbody id="attendance-list"></tbody>
+        </table>
+    </div>
+    
+    <div id="scores" class="container1 hidden">
+        <h2>Mark Scores</h2>
+        <button onclick="backToDashboard()">Back</button>
+        <table>
+            <thead>
+                <tr>
+                    <th class="team-name-col">Team Name</th>
+                    <th class="review-col">Review 1</th>
+                    <th class="review-col">Review 2</th>
+                    <th class="review-col">Review 3</th>
+                    <th class="final-score-col">Final Score</th>
+                </tr>
+            </thead>
+            <tbody id="scores-list"></tbody>
+        </table>
+    </div>
+    <div class="creator-note-container">
+        <p>🌟 Website created by:</p>
+        <p>🔹 Bobby B Wilfred (23BCE1828)</p>
+        <p>🔹 Amrith Krishna (23BCE1149)</p>
+      </div>
