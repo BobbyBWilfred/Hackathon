@@ -74,7 +74,8 @@ const app = express();
 const server = http.createServer(app);
 
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
+
 app.use(session({
     secret: 'your-strong-secret-key',
     resave: false,
@@ -243,7 +244,7 @@ app.post('/api/mark-attendance', async (req, res) => {
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'hackathon.html'));
+    res.sendFile(path.join(__dirname, 'hackathon.html'));
 });
 
 
