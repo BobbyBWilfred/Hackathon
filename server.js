@@ -73,7 +73,7 @@ const Admin = mongoose.model('Admin', adminSchema);
 const app = express();
 const server = http.createServer(app);
 
-
+app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
 app.use(session({
