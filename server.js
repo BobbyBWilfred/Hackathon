@@ -256,7 +256,7 @@ app.post('/api/mark-attendance', async (req, res) => {
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'hackathon.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 
