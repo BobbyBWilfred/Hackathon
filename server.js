@@ -199,8 +199,15 @@ app.get('/api/participants', async (req, res) => {
 
 
 app.post('/admin/login', async (req, res) => {
-    const { regNo, password } = req.body; // Correctly destructure after checking if body exists
+    // 1. Check if req.body exists *before* trying to destructure
+    if (!req.body || Object.keys(req.body).length === 0) {  // Check if req.body is empty
+        console.error("Request body is missing or empty!"); // Log the error on the server
+        return res.status(400).json({ success: false, message: "Request body is missing." }); // Send 400 error
+    }
 
+    const { regNo, password } = req.body; // Now it's safe to destructure
+
+    // 2. Validate input (very important!)
     if (!regNo || !password) {
         return res.status(400).json({ success: false, message: "Registration number and password are required." });
     }
@@ -215,7 +222,7 @@ app.post('/admin/login', async (req, res) => {
         if (passwordMatch) {
             req.session.regNo = regNo;
             req.session.role = 'admin';
-            return res.json({ success: true }); // Send success response
+            return res.json({ success: true });
         } else {
             return res.status(401).json({ success: false, message: 'Invalid credentials!' });
         }
