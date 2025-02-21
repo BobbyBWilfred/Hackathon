@@ -199,26 +199,31 @@ app.get('/api/participants', async (req, res) => {
 
 
 app.post('/admin/login', async (req, res) => {
-    const { regNo, password } = req.body;
+    const { regNo, password } = req.body; // Correctly destructure after checking if body exists
+
+    if (!regNo || !password) {
+        return res.status(400).json({ success: false, message: "Registration number and password are required." });
+    }
+
     try {
         const admin = await Admin.findOne({ regNo });
-        if (!admin) return res.status(401).json({ success: false, message: 'Invalid credentials!' });
+        if (!admin) {
+            return res.status(401).json({ success: false, message: 'Invalid credentials!' });
+        }
 
         const passwordMatch = await bcrypt.compare(password, admin.password);
         if (passwordMatch) {
             req.session.regNo = regNo;
             req.session.role = 'admin';
-            return res.json({ success: true, role: 'admin', name: admin.name });
+            return res.json({ success: true }); // Send success response
         } else {
             return res.status(401).json({ success: false, message: 'Invalid credentials!' });
         }
     } catch (error) {
-        console.error("Admin login error:", error);
-        return res.status(500).json({ success: false, message: 'Login error' });
+        console.error("Login error:", error);
+        return res.status(500).json({ success: false, message: 'An error occurred during login.' });
     }
 });
-
-
 
 app.post('/api/mark-attendance', async (req, res) => {
     if (req.session.role !== 'admin') return res.status(403).json({ message: "Unauthorized" });
