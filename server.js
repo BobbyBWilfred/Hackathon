@@ -222,7 +222,7 @@ app.post('/admin/login', async (req, res) => {
         if (passwordMatch) {
             req.session.regNo = regNo;
             req.session.role = 'admin';
-            return res.json({ success: true });
+            return res.json({ success: true, name: admin.name });
         } else {
             return res.status(401).json({ success: false, message: 'Invalid credentials!' });
         }
